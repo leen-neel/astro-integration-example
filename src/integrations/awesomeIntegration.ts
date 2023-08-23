@@ -1,11 +1,18 @@
-import type { AstroIntegration, AstroConfig } from "astro";
+import type { AstroIntegration } from "astro";
 
-export default function init_test(): AstroIntegration {
+type AwesomeType = {
+  name: string;
+};
+
+export default function awesomeIntegration(
+  options: AwesomeType
+): AstroIntegration {
   return {
     name: "init_test",
     hooks: {
-      "astro:config:setup": () => {
-        console.log("hello world");
+      "astro:config:setup": ({ command, config }) => {
+        console.log(`astro:config:setup> running command: ${command}`);
+        console.log(`Greetings from ${options.name}!`);
       },
     },
   };
